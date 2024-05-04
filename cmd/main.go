@@ -1,15 +1,27 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"github.com/Vladroon22/RealTimeChat/internal/server"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
 func main() {
-	fmt.Println("Server is listening --> localhost:8080")
-	srv := server.New()
-	srv.SetupEndPoints()
-	log.Fatal(srv.Server.ListenAndServe())
+	/*
+		fmt.Println("Server is listening --> localhost:8080")
+		srv := server.New()
+		srv.SetupEndPoints()
+		log.Fatal(srv.Server.ListenAndServe())
+	*/
+	a := app.New()
+	w := a.NewWindow("Hello")
+
+	hello := widget.NewLabel("Hello Fyne")
+	w.SetContent(container.NewVBox(
+		hello,
+		widget.NewButton("Hi!", func() {
+			hello.SetText("Welcome :)")
+		}),
+	))
+	w.ShowAndRun()
 }
