@@ -11,7 +11,7 @@ func main() {
 		fmt.Println("Server is listening --> localhost:8080")
 		srv := server.New()
 		srv.SetupEndPoints()
-		log.Fatal(srv.Server.ListenAndServe())
+		srv.Start()
 	*/
 	a := app.New()
 	w := a.NewWindow("Hello")

@@ -19,7 +19,7 @@ var upgrader = websocket.Upgrader{
 type Server struct {
 	mutex   sync.Mutex
 	clients map[string]*websocket.Conn
-	Server  *http.Server
+	server  *http.Server
 	logg    *logrus.Logger
 }
 
@@ -27,10 +27,14 @@ func New() *Server {
 	return &Server{
 		clients: make(map[string]*websocket.Conn),
 		logg:    logrus.New(),
-		Server: &http.Server{
+		server: &http.Server{
 			Addr: ":8080",
 		},
 	}
+}
+
+func (s *Server) Start() {
+	s.logg.Fatalln(s.server.ListenAndServe())
 }
 
 func (s *Server) GetName(conn *websocket.Conn) string {
